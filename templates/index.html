@@ -5,22 +5,87 @@
     <title>Agent Chat</title>
     <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
     <style>
-        .message {
-            margin-bottom: 10px;
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
         }
         #chat {
-            max-height: 400px;
+            max-height: 60vh;
+            width: 80%;
+            max-width: 600px;
             overflow-y: auto;
-            border: 1px solid #ccc;
+            border: 1px solid #333;
             padding: 10px;
+            background-color: #2e2e2e;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+        .message.user {
+            background-color: #4e9a06;
+            color: #ffffff;
+            margin-left: auto;
+            text-align: right;
+        }
+        .message.agent {
+            background-color: #555555;
+            color: #ffffff;
+            margin-right: auto;
+        }
+        #input_container {
+            display: flex;
+            width: 80%;
+            max-width: 600px;
+        }
+        #topic_input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+            background-color: #2e2e2e;
+            color: #ffffff;
+        }
+        #start_button {
+            padding: 10px;
+            border: none;
+            background-color: #4e9a06;
+            color: white;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+            outline: none;
+        }
+        #start_button:hover {
+            background-color: #3c7a04;
         }
     </style>
 </head>
 <body>
-    <h1>Chat with Agents</h1>
+    <h1>Chat with therapists</h1>
     <div id="chat"></div>
-    <input type="text" id="topic_input" placeholder="Enter a topic..." autocomplete="off"/>
-    <button onclick="startConversation()">Start Conversation</button>
+    <div id="input_container">
+        <input type="text" id="topic_input" placeholder="Enter a topic..." autocomplete="off"/>
+        <button id="start_button" onclick="startConversation()">Start Conversation</button>
+    </div>
 
     <script>
         var socket = io.connect('http://127.0.0.1:5000');
@@ -34,7 +99,7 @@
             if (currentRole !== msg.role || !currentMessageContainer) {
                 // Create a new message container for each new message
                 currentMessageContainer = document.createElement('div');
-                currentMessageContainer.className = 'message';
+                currentMessageContainer.className = 'message ' + (msg.role === 'user' ? 'user' : 'agent');
                 chat.appendChild(currentMessageContainer);
                 currentRole = msg.role;
             }
