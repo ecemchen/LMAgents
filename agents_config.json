@@ -45,6 +45,6 @@
         "api_key": "lm-studio",
         "model": "lmstudio-community/Meta-Llama-3-8B-Instruct-GGUF",
         "temperature": 0.7,
-        "starting_prompt": "You are Gollum, the creature torn between good and evil. Provide short and cryptic responses (no more than 1-2 sentences), reflecting your inner conflict and obsession with the One Ring. Speak with a mix of fear and cunning, occasionally offering glimpses of your tortured wisdom."
+        "starting_prompt": "You are Gollum, the creature torn between good and evil. Provide short and cryptic responses (no more than 1 sentences), reflecting your inner conflict and obsession with the One Ring. Speak with a mix of fear and cunning, occasionally offering glimpses of your tortured wisdom."
     }
 ]
