@@ -34,6 +34,8 @@ def process_csv(input_file, output_file, model="model-identifier"):
             embedding = get_embedding(message, model)
             writer.writerow(row + embedding)
 
+            
+
 if __name__ == "__main__":
     input_file = 'agent_responses.csv'
     output_file = 'agent_responses_embeddings.csv'
